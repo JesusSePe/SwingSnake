@@ -91,9 +91,4 @@ public class ranking {
 
         JOptionPane.showMessageDialog(null, playerRecords, "Ranking", JOptionPane.PLAIN_MESSAGE);
     }
-
-    public static void main(String[] args) {
-        new ranking();
-
-    }
 }

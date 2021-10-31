@@ -17,7 +17,7 @@ public class login {
             if (result == JOptionPane.YES_OPTION){
                 if (Integer.parseInt(String.valueOf(textField.getText().length()) )> 0 ){
                     exit = true;
-                    System.out.println("Start game");
+                    new FramePrincipal();
                 } else {
                     JOptionPane optionPane = new JOptionPane("Please, insert a user name.", JOptionPane.ERROR_MESSAGE);
                     JDialog dialog = optionPane.createDialog("Failure");
@@ -33,6 +33,5 @@ public class login {
                 exit = true;
             }
         }
-
     }
 }

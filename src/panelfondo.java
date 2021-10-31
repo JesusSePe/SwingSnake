@@ -25,7 +25,6 @@ public class panelfondo extends JPanel {
                 pintor.fillRect(res/2+i*tam,res/2+j*tam, tam-1, tam-1);
 
             }
-
         }
     }
 

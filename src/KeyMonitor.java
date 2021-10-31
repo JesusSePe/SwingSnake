@@ -1,2 +1,6 @@
-package PACKAGE_NAME;public class KeyMonitor {
+public class KeyMonitor {
+
+	/* para controlar las posibles opciones tecleadas
+
+	pausa, reanudar, salir(esc)*/
 }
