@@ -65,7 +65,7 @@ public class ranking {
             con= (Connection) DriverManager.getConnection(url, user, pass);
             // Si la conexion fue exitosa mostramos un mensaje de conexion exitosa
             if (con!=null){
-                ResultSet results = con.createStatement().executeQuery("INSERT INTO records (`username`, `points`) VALUES ('"+username+"', "+pts+");");
+                int results = con.createStatement().executeUpdate("INSERT INTO records (`username`, `points`) VALUES ('"+username+"', "+pts+");");
             }
         }
         // Si la conexion NO fue exitosa mostramos un mensaje de error
@@ -75,20 +75,27 @@ public class ranking {
     }
 
     public ranking() {
+        // Add user data to DB
+        Player player = login.getPlayer();
+        addPlayer(player.getName(), player.getpts());
+
+        // Get ranking
         List<Player> players = getPlayers();
 
         // Preparing pane
         JList playerRecords = new JList();
         DefaultListModel model = new DefaultListModel();
 
+
+
         // Populating pane with users from db
         for (Player user: players ) {
             model.addElement(user.toString());
         }
-
         playerRecords.setModel(model);
 
-
+        // Showing dialog
         JOptionPane.showMessageDialog(null, playerRecords, "Ranking", JOptionPane.PLAIN_MESSAGE);
+
     }
 }

@@ -1,6 +1,7 @@
 import javax.swing.*;
 
 public class login {
+    static Player player;
     public login(){
         boolean exit = false;
         while (!exit){
@@ -17,6 +18,7 @@ public class login {
             if (result == JOptionPane.YES_OPTION){
                 if (Integer.parseInt(String.valueOf(textField.getText().length()) )> 0 ){
                     exit = true;
+                    player = new Player(textField.getText(), 0);
                     new FramePrincipal();
                 } else {
                     JOptionPane optionPane = new JOptionPane("Please, insert a user name.", JOptionPane.ERROR_MESSAGE);
@@ -33,5 +35,9 @@ public class login {
                 exit = true;
             }
         }
+    }
+
+    public static Player getPlayer() {
+        return player;
     }
 }

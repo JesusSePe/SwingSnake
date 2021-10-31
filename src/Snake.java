@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.logging.ConsoleHandler;
 
 public class Snake {
     public Sentido snt;
@@ -57,39 +58,84 @@ public class Snake {
         switch(nuevaDireccion) {
             case Arriba:
                 System.out.println("Vamos para arriba");
-                avance(0, -20);
+                try {
+                    avance(0, -20);
+                } catch (EndGame e) {
+                    e.printStackTrace();
+                }
                 break;
             case Abajo:
                 System.out.println("Vamos para abajo");
-                avance(0, 20);
+                try {
+                    avance(0, 20);
+                } catch (EndGame e) {
+                    e.printStackTrace();
+                }
                 break;
             case Derecha:
                 System.out.println("Vamos para la derecha");
-                avance(20, 0);
+                try {
+                    avance(20, 0);
+                } catch (EndGame e) {
+                    e.printStackTrace();
+                }
                 break;
             case Izquierda:
                 System.out.println("Vamos para la izquierda");
-                avance(-20, 0);
+                try {
+                    avance(-20, 0);
+                } catch (EndGame e) {
+                    e.printStackTrace();
+                }
                 break;
         }
+
     }
 
-    public void avance(int x, int y) {
+    public void avance(int x, int y) throws EndGame {
+        // Save head and body positions for checks
+        int headX = 0;
+        int headY = 0;
+        int partX = 0;
+        int partY = 0;
+        // New error for custom exception
+        Throwable err = new Throwable();
+        // Advance body
         for (int n=0;n<snake.size();n++) {
-
+            // Head case
             if (n==0) {
+                // Store last position
                 snake.get(n).setLastPosX(snake.get(n).getPosX());
                 snake.get(n).setLastPosY(snake.get(n).getPosY());
-
+                // Store new position
                 snake.get(n).setPosX(snake.get(n).getPosX() + x);
                 snake.get(n).setPosY(snake.get(n).getPosY() + y);
+                // Save head new position for checks
+                headX = snake.get(n).getPosX();
+                headY = snake.get(n).getPosY();
+                // Check if you got out of the map
+                if(headX < 60 ||  headX > 720) {
+                    throw new EndGame("Te has salido del tablero. Fin del juego", err);
+                }
+                if(headY < 60 ||  headY > 540) {
+                    throw new EndGame("Te has salido del tablero. Fin del juego", err);
+                }
             }
+            // Rest of the body case
             else {
+                // Store last position
                 snake.get(n).setLastPosX(snake.get(n).getPosX());
                 snake.get(n).setLastPosY(snake.get(n).getPosY());
-
+                // Set new position
                 snake.get(n).setPosX(snake.get(n-1).getLastPosX() );
                 snake.get(n).setPosY(snake.get(n-1).getLastPosY() );
+                // Store part position for checks
+                partX = snake.get(n).getPosX();
+                partY = snake.get(n).getPosY();
+                // Check if you did bite yourself
+                if(partX == headX && partY == headY) {
+                    throw new EndGame("Te has mordido. Fin del juego", err);
+                }
             }
 
 
@@ -126,3 +172,4 @@ public class Snake {
         }
     }
 }
+

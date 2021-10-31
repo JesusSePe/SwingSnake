@@ -59,7 +59,6 @@ public class FramePrincipal extends JFrame{
                     snk.setSnt(dir);
                     snk.printSnake(getGraphics());
                 }
-                snk.isEatenEgg();
             }
 
 
