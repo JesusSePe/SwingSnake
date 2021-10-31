@@ -26,8 +26,8 @@ public class login {
                     exit = false;
                 }
             } else if (result == JOptionPane.NO_OPTION){
-                System.out.println("Ranking window");
                 exit = true;
+                new ranking();
             } else if (result == JOptionPane.CANCEL_OPTION){
                 System.exit(0);
                 exit = true;
