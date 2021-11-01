@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
 
 public class FramePrincipal extends JFrame{
     private int cell_width =20;
@@ -41,26 +40,22 @@ public class FramePrincipal extends JFrame{
             @Override
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_DOWN) {
-                    System.out.println("down");
                     Sentido dir= new Sentido(Direccion.Abajo);
                     snk.setSnt(dir);
                     snk.printSnake(getGraphics());
                 }
                 if(e.getKeyCode()==KeyEvent.VK_UP) {
-                    System.out.println("up");
                     Sentido dir= new Sentido(Direccion.Arriba);
                     snk.setSnt(dir);
                     snk.printSnake(getGraphics());
                 }
                 if(e.getKeyCode()==KeyEvent.VK_LEFT) {
-                    System.out.println("left");
                     Sentido dir= new Sentido(Direccion.Izquierda);
                     snk.setSnt(dir);
                     snk.printSnake(getGraphics());
 
                 }
                 if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
-                    System.out.println("right");
                     Sentido dir= new Sentido(Direccion.Derecha);
                     snk.setSnt(dir);
                     snk.printSnake(getGraphics());

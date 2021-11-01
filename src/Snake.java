@@ -93,7 +93,6 @@ public class Snake {
 
         switch(nuevaDireccion) {
             case Arriba:
-                System.out.println("Vamos para arriba");
                 try {
                     avance(0, -20);
                 } catch (EndGame e) {
@@ -101,7 +100,6 @@ public class Snake {
                 }
                 break;
             case Abajo:
-                System.out.println("Vamos para abajo");
                 try {
                     avance(0, 20);
                 } catch (EndGame e) {
@@ -109,7 +107,6 @@ public class Snake {
                 }
                 break;
             case Derecha:
-                System.out.println("Vamos para la derecha");
                 try {
                     avance(20, 0);
                 } catch (EndGame e) {
@@ -117,7 +114,6 @@ public class Snake {
                 }
                 break;
             case Izquierda:
-                System.out.println("Vamos para la izquierda");
                 try {
                     avance(-20, 0);
                 } catch (EndGame e) {
@@ -192,7 +188,6 @@ public class Snake {
     }
     public void keyTyped(KeyEvent ev) {
         if (ev.getKeyCode() == KeyEvent.VK_UP ) {
-            System.out.println("downnnnnnnnnnnnnn");
         }
     }
 }
