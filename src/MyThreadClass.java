@@ -20,18 +20,11 @@ public class MyThreadClass implements Runnable{
         this.hilo = hilo;
     }
 
-
     public void run() {
         while (true) {
-            snk.avanzar();
             try{ //speed
                 Thread.sleep(500);
             }catch (InterruptedException e) { }
-
-
-
         }
-
     }
-
 }

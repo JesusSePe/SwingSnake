@@ -76,6 +76,7 @@ public class FramePrincipal extends JFrame{
             }
         });
 
+
     }
 
     public void checkEgg(){
@@ -84,6 +85,12 @@ public class FramePrincipal extends JFrame{
             snk.setEatenEgg(true);
             login.getPlayer().setpts(login.getPlayer().getpts() + 100);
             this.setEgg(new Egg());
+            // Create a new egg if the current one is on the snake
+            for (int n=0;n<snk.getSnake().size();n++) {
+                if(snk.getSnake().get(n).getPosX() == getEgg().getPosX() && snk.getSnake().get(n).getPosY() == getEgg().getPosY()){
+                    this.setEgg(new Egg());
+                }
+            }
             this.repaint();
         }
         // Increase snake size in case of eating egg
