@@ -76,8 +76,12 @@ public class ranking {
 
     public ranking() {
         // Add user data to DB
-        Player player = login.getPlayer();
-        addPlayer(player.getName(), player.getpts());
+        try {
+            Player player = login.getPlayer();
+            addPlayer(player.getName(), player.getpts());
+        } catch (Exception e) {
+            System.out.println("User not logged in");
+        }
 
         // Get ranking
         List<Player> players = getPlayers();
