@@ -66,7 +66,6 @@ public class FramePrincipal extends JFrame{
                     snk.printSnake(getGraphics());
                 }
                 checkEgg();
-                System.out.println("X: " + snk.getHeadX() + " Y: " + snk.getHeadY());
             }
 
 
