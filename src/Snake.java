@@ -7,6 +7,42 @@ public class Snake {
     public Sentido snt;
     ArrayList<Nodo> snake = new ArrayList<Nodo>();
     public boolean eatenEgg = false;
+    private int headX = 0;
+    private int headY = 0;
+    private int lastNodeX = 0;
+    private int lastNodeY = 0;
+
+    public int getLastNodeX() {
+        return lastNodeX;
+    }
+
+    public void setLastNodeX(int lastNodeX) {
+        this.lastNodeX = lastNodeX;
+    }
+
+    public int getLastNodeY() {
+        return lastNodeY;
+    }
+
+    public void setLastNodeY(int lastNodeY) {
+        this.lastNodeY = lastNodeY;
+    }
+
+    public int getHeadX() {
+        return headX;
+    }
+
+    public void setHeadX(int headX) {
+        this.headX = headX;
+    }
+
+    public int getHeadY() {
+        return headY;
+    }
+
+    public void setHeadY(int headY) {
+        this.headY = headY;
+    }
 
     //constructor
     public Snake(Sentido snt) {
@@ -93,11 +129,6 @@ public class Snake {
     }
 
     public void avance(int x, int y) throws EndGame {
-        // Save head and body positions for checks
-        int headX = 0;
-        int headY = 0;
-        int partX = 0;
-        int partY = 0;
         // New error for custom exception
         Throwable err = new Throwable();
         // Advance body
@@ -111,8 +142,8 @@ public class Snake {
                 snake.get(n).setPosX(snake.get(n).getPosX() + x);
                 snake.get(n).setPosY(snake.get(n).getPosY() + y);
                 // Save head new position for checks
-                headX = snake.get(n).getPosX();
-                headY = snake.get(n).getPosY();
+                setHeadX(snake.get(n).getPosX());
+                setHeadY(snake.get(n).getPosY());
                 // Check if you got out of the map
                 if(headX < 60 ||  headX > 720) {
                     throw new EndGame("Te has salido del tablero. Fin del juego", err);
@@ -120,6 +151,7 @@ public class Snake {
                 if(headY < 60 ||  headY > 540) {
                     throw new EndGame("Te has salido del tablero. Fin del juego", err);
                 }
+
             }
             // Rest of the body case
             else {
@@ -130,15 +162,13 @@ public class Snake {
                 snake.get(n).setPosX(snake.get(n-1).getLastPosX() );
                 snake.get(n).setPosY(snake.get(n-1).getLastPosY() );
                 // Store part position for checks
-                partX = snake.get(n).getPosX();
-                partY = snake.get(n).getPosY();
+                lastNodeX = snake.get(n).getPosX();
+                lastNodeY = snake.get(n).getPosY();
                 // Check if you did bite yourself
-                if(partX == headX && partY == headY) {
+                if(lastNodeX == headX && lastNodeY == headY) {
                     throw new EndGame("Te has mordido. Fin del juego", err);
                 }
             }
-
-
         }
     }
     public void draw(Graphics g) {
@@ -146,12 +176,7 @@ public class Snake {
         for (Nodo n: this.snake) {
             g.setColor(Color.DARK_GRAY);
             g.fillRect(n.getPosX(), n.getPosY(), 20, 20);
-
-
         }
-
-
-
     }
 
     public void printSnake(Graphics g) {
@@ -168,7 +193,6 @@ public class Snake {
     public void keyTyped(KeyEvent ev) {
         if (ev.getKeyCode() == KeyEvent.VK_UP ) {
             System.out.println("downnnnnnnnnnnnnn");
-
         }
     }
 }

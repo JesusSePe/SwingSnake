@@ -40,7 +40,7 @@ public class ranking {
             con= (Connection) DriverManager.getConnection(url, user, pass);
             // Si la conexion fue exitosa mostramos un mensaje de conexion exitosa
             if (con!=null){
-                ResultSet results = con.createStatement().executeQuery("SELECT username, points from records");
+                ResultSet results = con.createStatement().executeQuery("SELECT username, points from records ORDER BY points desc");
 
                 while(results.next()){
                     Player user = new Player(results.getString("username"), results.getInt("points"));

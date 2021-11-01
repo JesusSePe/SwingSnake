@@ -28,10 +28,8 @@ public class Egg {
                 y_Number=y_Number*20;
             }
         }
-        this.posX = x_Number;
-
-
-        this.posY = y_Number;
+        this.setPosX(x_Number);
+        this.setPosY(y_Number);
     }
 
     //setget

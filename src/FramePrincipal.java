@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 public class FramePrincipal extends JFrame{
     private int cell_width =20;
@@ -11,10 +12,15 @@ public class FramePrincipal extends JFrame{
     private int speed;
     private JPanel panel1= new JPanel();
     private Snake snk=new Snake(new Sentido(Direccion.Arriba));
+    public Egg egg=new Egg();
 
+    public Egg getEgg() {
+        return egg;
+    }
 
-
-    private Egg egg=new Egg();
+    public void setEgg(Egg egg) {
+        this.egg = egg;
+    }
 
     public FramePrincipal() throws HeadlessException {
         setSize ( 800, 600 );
@@ -59,14 +65,35 @@ public class FramePrincipal extends JFrame{
                     snk.setSnt(dir);
                     snk.printSnake(getGraphics());
                 }
+                checkEgg();
+                System.out.println("X: " + snk.getHeadX() + " Y: " + snk.getHeadY());
             }
 
 
             @Override
-            public void keyReleased(KeyEvent e) {}
+            public void keyReleased(KeyEvent e) {
+                checkEgg();
+            }
         });
 
     }
+
+    public void checkEgg(){
+        // Check if you ate the egg
+        if (snk.getHeadX()==getEgg().getPosX() && snk.getHeadY() == getEgg().getPosY()) {
+            snk.setEatenEgg(true);
+            login.getPlayer().setpts(login.getPlayer().getpts() + 100);
+            this.setEgg(new Egg());
+            this.repaint();
+        }
+        // Increase snake size in case of eating egg
+        if(snk.isEatenEgg()) {
+            Nodo nodo = new Nodo(snk.getLastNodeX(), snk.getLastNodeY());
+            snk.getSnake().add(nodo);
+            snk.setEatenEgg(false);
+        }
+    }
+
 
     public void paint(Graphics g) {
         super.paint(g);
@@ -81,9 +108,6 @@ public class FramePrincipal extends JFrame{
         //egg
         g.setColor(Color.red);
         g.fillOval(egg.getPosX(), egg.getPosY(), cell_width, cell_height);
-
-
-
 
         //while (true) {
 
